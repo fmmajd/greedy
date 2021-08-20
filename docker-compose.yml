@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  php:
+    build: docker/php-fpm
+    volumes:
+      - ./docker/php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./docker/php-fpm/log:/var/log/php-fpm
+      - .:/var/www/html
+    links:
+      - db:db
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - ${DOCKER_APP_PORT-8000}:80
+    links:
+      - php:phpfpm
+    volumes:
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - .:/var/www/html
+      - ./docker/nginx/log:/var/log/nginx
+
+  db:
+    image: mariadb:10.6
+    ports:
+      - ${DOCKER_DATABASE_PORT-3306}:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    volumes:
+      - ./docker/mysql/databases:/var/lib/mysql

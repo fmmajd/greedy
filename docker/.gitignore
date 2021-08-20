@@ -1,0 +1,3 @@
+nginx/log
+php-fpm/log
+mysql/databases
