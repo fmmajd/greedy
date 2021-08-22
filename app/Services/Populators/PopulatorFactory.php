@@ -15,6 +15,9 @@ class PopulatorFactory
             case self::ARTICLES:
                 return app()->make(ArticlePopulator::class);
 
+            case self::PRODUCTS:
+                return app()->make(ProductPopulator::class);
+
             
             default:
                 throw new Exception('populator class for this type was not found');

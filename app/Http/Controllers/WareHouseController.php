@@ -12,7 +12,7 @@ class WareHouseController extends Controller
     public function process(WareHouseRequest $request): void
     {
         $this->validateFiles($request);
-        
+
         $this->populateModels($request);
     }
 
@@ -39,5 +39,8 @@ class WareHouseController extends Controller
 
         $articlesPopulator = PopulatorFactory::make(PopulatorFactory::ARTICLES);
         $articlesPopulator->populateFromJson($articles);
+
+        $productsPopulator = PopulatorFactory::make(PopulatorFactory::PRODUCTS);
+        $productsPopulator->populateFromJson($products);
     }
 }
