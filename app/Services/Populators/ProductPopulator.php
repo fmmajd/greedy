@@ -14,9 +14,9 @@ class ProductPopulator implements JsonPopulator
     {
         $this->productRepository->truncate();
 
-        foreach ($json['products'] as $article) {
-            $name = $article['name'];
-            $price = $article['price'];
+        foreach ($json['products'] as $product) {
+            $name = $product['name'];
+            $price = $product['price'];
             $this->productRepository->createBy($name, $price);
         }
     }

@@ -42,5 +42,8 @@ class WareHouseController extends Controller
 
         $productsPopulator = PopulatorFactory::make(PopulatorFactory::PRODUCTS);
         $productsPopulator->populateFromJson($products);
+
+        $requirementsPopulator = PopulatorFactory::make(PopulatorFactory::PRODUCT_REQUIREMENTS);
+        $requirementsPopulator->populateFromJson($products);
     }
 }
