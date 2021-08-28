@@ -25,4 +25,10 @@ class ArticlesRepository implements ArticlesRepositoryInterface
 
         $article->save();
     }
+
+    public function updateStock(Article $article, int $newStock): void
+    {
+        $article->stock = $newStock;
+        $article->save();
+    }
 }

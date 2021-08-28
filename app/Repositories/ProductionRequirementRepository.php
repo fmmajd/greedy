@@ -21,4 +21,15 @@ class ProductionRequirementRepository implements ProductionRequirementRepository
 
         $pr->save();
     }
+
+    /**
+     * @return ProductionRequirement[]
+     */
+    public function fetchProductRequirementsWithArticles(int $productId): array
+    {
+        return ProductionRequirement::where('product_id', $productId)
+            ->with('article')
+            ->get()
+            ->all();
+    }
 }
