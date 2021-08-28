@@ -14,13 +14,26 @@ class GreedyStrategy implements Strategy
         private WarehouseServiceInterface $warehouseService
     ) {}
 
-    public function decide(): void
+    public function decide(): array
     {
         $this->warehouseItemRepository->truncate();
 
-        $productDTO = $this->findTheMostProfitableProduct(Product::all()->all());
-        $this->warehouseItemRepository->createBy($productDTO->getProductId(), $productDTO->getQuantity(), $productDTO->getProfit());
-        $this->warehouseService->updateArticleStocksBaseOnNewWarehouseInventory($productDTO->getProductId(), $productDTO->getQuantity());
+        $products = $this->warehouseService->findUnproducedProductsWithRequirementsAndArticles();
+        $inventory = []; //variable to keep final products
+
+        while(!empty($products)) {
+            $productDTO = $this->findTheMostProfitableProduct($products);
+            if ($productDTO->getProductId() === 0) {
+                break;
+            }
+            $this->warehouseItemRepository->createBy($productDTO->getProductId(), $productDTO->getQuantity(), $productDTO->getProfit());
+            $this->warehouseService->updateArticleStocksBaseOnNewWarehouseInventory($productDTO->getProductId(), $productDTO->getQuantity());
+
+            $inventory[] = $productDTO;
+            $products = $this->warehouseService->findUnproducedProductsWithRequirementsAndArticles();
+        }
+
+        return $inventory;
     }
 
     /**

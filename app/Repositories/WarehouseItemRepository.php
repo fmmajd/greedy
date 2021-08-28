@@ -22,4 +22,9 @@ class WarehouseItemRepository implements WarehouseItemRepositoryInterface
 
         $item->save();
     }
+
+    public function allProductIds(): array
+    {
+        return WarehouseItem::pluck('product_id')->all();
+    }
 }

@@ -29,4 +29,12 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::where('name', $name)->first();
     }
+
+    public function findProductsExceptIdsWithRequirementsAndArticles(array $ids): array
+    {
+        return Product::with(['requirements', 'requirements.article'])
+            ->whereNotIn('id', $ids)
+            ->get()
+            ->all();
+    }
 }

@@ -20,7 +20,7 @@ class WareHouseController extends Controller
 
         $this->populateModels($request);
 
-        $this->strategy->decide();
+        $inventory = $this->strategy->decide();
     }
 
     private function validateFiles(WareHouseRequest $request): void

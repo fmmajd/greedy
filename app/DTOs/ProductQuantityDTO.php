@@ -4,18 +4,18 @@ namespace App\DTOs;
 
 class ProductQuantityDTO
 {
-    private ?int $productId = null;
+    private int $productId = 0;
 
     private int $quantity = 0;
 
     private int $profit = 0;
 
-    public function getProductId(): ?int
+    public function getProductId(): int
     {
         return $this->productId;
     }
 
-    public function setProductId(?int $productId): ProductQuantityDTO
+    public function setProductId(int $productId): ProductQuantityDTO
     {
         $this->productId = $productId;
         return $this;

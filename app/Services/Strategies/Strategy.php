@@ -2,7 +2,12 @@
 
 namespace App\Services\Strategies;
 
+use App\DTOs\ProductQuantityDTO;
+
 interface Strategy
 {
-    public function decide(): void;
+    /**
+     * @return ProductQuantityDTO
+     */
+    public function decide(): array;
 }
