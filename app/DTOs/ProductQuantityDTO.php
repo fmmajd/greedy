@@ -4,11 +4,24 @@ namespace App\DTOs;
 
 class ProductQuantityDTO
 {
+    private ?string $productName = null;
+
     private int $productId = 0;
 
     private int $quantity = 0;
 
     private int $profit = 0;
+
+    public function getProductName(): ?string
+    {
+        return $this->productName;
+    }
+
+    public function setProductName(string $productName): ProductQuantityDTO
+    {
+        $this->productName = $productName;
+        return $this;
+    }
 
     public function getProductId(): int
     {

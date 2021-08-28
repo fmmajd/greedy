@@ -48,6 +48,7 @@ class GreedyStrategy implements Strategy
             $profit = $buildableProducts * $product->price;
             if ($profit > $max) {
                 $dto->setProductId($product->id)
+                    ->setProductName($product->name)
                     ->setQuantity($buildableProducts)
                     ->setProfit($profit);
                 $max = $profit;

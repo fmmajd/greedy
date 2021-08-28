@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property ProductionRequirement[] $requirements
+ * @property int $id
+ * @property int $price
+ * @property string $name
  */
 class Product extends Model
 {
