@@ -4,16 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\WareHouseRequest;
 use App\Services\Populators\PopulatorFactory;
+use App\Services\Strategies\Strategy;
 use App\Services\Validators\JsonValidatorFactory;
 use Illuminate\Routing\Controller;
 
 class WareHouseController extends Controller
 {
+    public function __construct(
+        private Strategy $strategy
+    ) {}
+
     public function process(WareHouseRequest $request): void
     {
         $this->validateFiles($request);
 
         $this->populateModels($request);
+
+        $this->strategy->decide();
     }
 
     private function validateFiles(WareHouseRequest $request): void

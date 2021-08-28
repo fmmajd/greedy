@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property Article $article
+ */
 class ProductionRequirement extends Model
 {
     protected $table = 'production_requirements';
@@ -18,6 +21,6 @@ class ProductionRequirement extends Model
 
     public function article(): BelongsTo
     {
-        return $this->belongsTo(Article::class, 'article_ref_id', 'ref_id');
+        return $this->belongsTo(Article::class, 'article_ref', 'ref_id');
     }
 }
