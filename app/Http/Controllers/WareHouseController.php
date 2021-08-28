@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WareHouseRequest;
+use App\Http\Resources\InventoryResource;
 use App\Services\Populators\PopulatorFactory;
 use App\Services\Strategies\Strategy;
 use App\Services\Validators\JsonValidatorFactory;
@@ -14,13 +15,15 @@ class WareHouseController extends Controller
         private Strategy $strategy
     ) {}
 
-    public function process(WareHouseRequest $request): void
+    public function process(WareHouseRequest $request)
     {
         $this->validateFiles($request);
 
         $this->populateModels($request);
 
         $inventory = $this->strategy->decide();
+
+        return (new InventoryResource($inventory));
     }
 
     private function validateFiles(WareHouseRequest $request): void
