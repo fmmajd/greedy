@@ -4,12 +4,23 @@ namespace App\Services\Strategies;
 
 use App\DTOs\ProductQuantityDTO;
 use App\Models\Product;
+use App\Repositories\Contracts\WarehouseItemRepositoryInterface;
+use App\Services\Warehouse\WarehouseServiceInterface;
 
 class GreedyStrategy implements Strategy
 {
+    public function __construct(
+        private WarehouseItemRepositoryInterface $warehouseItemRepository,
+        private WarehouseServiceInterface $warehouseService
+    ) {}
+
     public function decide(): void
     {
-        $this->findTheMostProfitableProduct(Product::all()->all());
+        $this->warehouseItemRepository->truncate();
+
+        $productDTO = $this->findTheMostProfitableProduct(Product::all()->all());
+        $this->warehouseItemRepository->createBy($productDTO->getProductId(), $productDTO->getQuantity(), $productDTO->getProfit());
+        $this->warehouseService->updateArticleStocksBaseOnNewWarehouseInventory($productDTO->getProductId(), $productDTO->getQuantity());
     }
 
     /**

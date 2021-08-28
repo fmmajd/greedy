@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property Article $article
+ * @property int $amount
  */
 class ProductionRequirement extends Model
 {
