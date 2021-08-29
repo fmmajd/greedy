@@ -1,0 +1,48 @@
+{
+	"info": {
+		"_postman_id": "bc625437-a841-406b-a1f8-dfeb8e3d1706",
+		"name": "Devolon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "warehouse",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "articles",
+							"type": "file",
+							"src": "/Users/fatemeh/Desktop/articles.json"
+						},
+						{
+							"key": "products",
+							"type": "file",
+							"src": "/Users/fatemeh/Desktop/products.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/warehouse",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"warehouse"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
