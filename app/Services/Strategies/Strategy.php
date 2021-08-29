@@ -7,7 +7,7 @@ use App\DTOs\ProductQuantityDTO;
 interface Strategy
 {
     /**
-     * @return ProductQuantityDTO
+     * @return ProductQuantityDTO[]
      */
     public function decide(): array;
 }
