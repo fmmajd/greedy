@@ -35,6 +35,7 @@ class WarehouseServiceTest extends TestCase
                     ->for(Article::factory())
                     ->make();
                 $mock->shouldReceive('fetchProductRequirementsWithArticles')
+                    ->once()
                     ->with($productId)
                     ->andReturn([$productionRequirement]);
             }
@@ -64,6 +65,7 @@ class WarehouseServiceTest extends TestCase
             ProductRepositoryInterface::class,
             function (MockInterface $mock) {
                 $mock->shouldReceive('findProductsExceptIdsWithRequirementsAndArticles')
+                    ->once()
                     ->with([1,2,3]);
             }
         );
@@ -72,6 +74,7 @@ class WarehouseServiceTest extends TestCase
             WarehouseItemRepositoryInterface::class,
             function (MockInterface $mock) {
                 $mock->shouldReceive('allProductIds')
+                    ->once()
                     ->andReturn([1,2,3]);
             }
         );
