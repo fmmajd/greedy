@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class ProductionRequirement extends Model
 {
+    use HasFactory;
+
     protected $table = 'production_requirements';
 
     protected $fillable = ['product_id', 'article_ref_id', 'amount'];
